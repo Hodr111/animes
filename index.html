@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta name="theme-color" content="#e50914">
+    <meta name="description" content="bygdëall animes - Assista aos melhores animes, desenhos e séries online">
+    <meta name="keywords" content="anime, streaming, séries, desenhos, online">
+    <title>bygdëall animes - Streaming de Animes e Séries</title>
+    
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="assets/icons/icon-192.png">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- CSS Principal -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- ===== HEADER ===== -->
+    <header class="header" role="banner">
+        <div class="header-container">
+            <div class="logo">
+                <i class="fas fa-play-circle"></i>
+                <span>bygdëall animes</span>
+            </div>
+
+            <nav class="nav-menu" id="navMenu" role="navigation">
+                <ul class="nav-list">
+                    <li><a href="#home" class="active"><i class="fas fa-home"></i> Início</a></li>
+                    <li><a href="#lancamentos"><i class="fas fa-fire"></i> Lançamentos</a></li>
+                    <li><a href="#populares"><i class="fas fa-chart-line"></i> Populares</a></li>
+                    <li><a href="#categorias"><i class="fas fa-tags"></i> Categorias</a></li>
+                    <li><a href="#favoritos"><i class="fas fa-heart"></i> Favoritos</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <div class="search-container">
+                    <input type="text" id="searchInput" placeholder="Pesquisar animes, séries..." aria-label="Pesquisar">
+                    <button id="searchBtn" aria-label="Buscar">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+                <button id="themeToggle" class="theme-btn" aria-label="Alternar tema">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button id="authBtn" class="auth-btn" aria-label="Minha conta">
+                    <i class="fas fa-user-circle"></i>
+                </button>
+                <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== NOTIFICAÇÃO ===== -->
+    <div class="notification" id="notification">
+        <div class="notification-content">
+            <i class="fas fa-info-circle"></i>
+            <div>
+                <div class="notification-title" id="notifTitle">Notificação</div>
+                <div class="notification-message" id="notifMessage">Bem-vindo ao bygdëall animes!</div>
+            </div>
+        </div>
+        <button class="notification-close" onclick="this.parentElement.classList.remove('show')">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+
+    <!-- ===== LOADING ===== -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner">
+            <i class="fas fa-film fa-3x fa-spin"></i>
+            <p>Carregando...</p>
+        </div>
+    </div>
+
+    <!-- ===== CONTEÚDO PRINCIPAL ===== -->
+    <main>
+        <!-- Banner Rotativo -->
+        <section class="hero-section" id="home">
+            <div class="hero-container" id="heroContainer">
+                <!-- Os slides serão inseridos via JavaScript -->
+                <div class="hero-controls">
+                    <button class="hero-prev" id="heroPrev" aria-label="Anterior">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="hero-next" id="heroNext" aria-label="Próximo">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+                <div class="hero-indicators" id="heroIndicators"></div>
+            </div>
+        </section>
+
+        <!-- Lançamentos -->
+        <section class="section" id="lancamentos">
+            <div class="section-header">
+                <h2><i class="fas fa-fire text-accent"></i> Lançamentos</h2>
+                <a href="#" class="view-all">Ver todos <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="carousel-container">
+                <button class="carousel-btn prev" data-carousel="lancamentos">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <div class="carousel" id="lancamentosCarousel"></div>
+                <button class="carousel-btn next" data-carousel="lancamentos">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- Mais Populares -->
+        <section class="section" id="populares">
+            <div class="section-header">
+                <h2><i class="fas fa-chart-line text-accent"></i> Mais Populares</h2>
+                <a href="#" class="view-all">Ver todos <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="carousel-container">
+                <button class="carousel-btn prev" data-carousel="populares">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <div class="carousel" id="popularesCarousel"></div>
+                <button class="carousel-btn next" data-carousel="populares">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- Recomendados -->
+        <section class="section" id="recomendados">
+            <div class="section-header">
+                <h2><i class="fas fa-star text-accent"></i> Recomendados para Você</h2>
+                <a href="#" class="view-all">Ver todos <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="carousel-container">
+                <button class="carousel-btn prev" data-carousel="recomendados">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <div class="carousel" id="recomendadosCarousel"></div>
+                <button class="carousel-btn next" data-carousel="recomendados">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- Continuar Assistindo -->
+        <section class="section" id="continuar">
+            <div class="section-header">
+                <h2><i class="fas fa-clock text-accent"></i> Continuar Assistindo</h2>
+                <a href="#" class="view-all">Ver todos <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="carousel-container">
+                <button class="carousel-btn prev" data-carousel="continuar">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <div class="carousel" id="continuarCarousel"></div>
+                <button class="carousel-btn next" data-carousel="continuar">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- Categorias -->
+        <section class="section" id="categorias">
+            <div class="section-header">
+                <h2><i class="fas fa-tags text-accent"></i> Categorias</h2>
+            </div>
+            <div class="categories-grid" id="categoriesGrid"></div>
+        </section>
+
+        <!-- Favoritos -->
+        <section class="section" id="favoritos">
+            <div class="section-header">
+                <h2><i class="fas fa-heart text-accent"></i> Meus Favoritos</h2>
+                <a href="#" class="view-all">Ver todos <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="carousel-container">
+                <button class="carousel-btn prev" data-carousel="favoritos">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <div class="carousel" id="favoritosCarousel"></div>
+                <button class="carousel-btn next" data-carousel="favoritos">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- ===== RODAPÉ ===== -->
+    <footer class="footer" role="contentinfo">
+        <div class="footer-content">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3><i class="fas fa-play-circle text-accent"></i> bygdëall animes</h3>
+                    <p>O melhor lugar para assistir animes, desenhos e séries online. Conteúdo exclusivo e de qualidade.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="#" aria-label="Discord"><i class="fab fa-discord"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Navegação</h4>
+                    <ul>
+                        <li><a href="#home">Início</a></li>
+                        <li><a href="#lancamentos">Lançamentos</a></li>
+                        <li><a href="#populares">Populares</a></li>
+                        <li><a href="#categorias">Categorias</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Conta</h4>
+                    <ul>
+                        <li><a href="#" id="loginLink">Entrar</a></li>
+                        <li><a href="#">Cadastrar</a></li>
+                        <li><a href="#">Minha Lista</a></li>
+                        <li><a href="#">Histórico</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Suporte</h4>
+                    <ul>
+                        <li><a href="#">Ajuda</a></li>
+                        <li><a href="#">Termos de Uso</a></li>
+                        <li><a href="#">Política de Privacidade</a></li>
+                        <li><a href="#">Contato</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 bygdëall animes - Todos os direitos reservados. Conteúdo apenas para demonstração.</p>
+                <div class="footer-badges">
+                    <span><i class="fas fa-check-circle"></i> PWA</span>
+                    <span><i class="fas fa-shield-alt"></i> Seguro</span>
+                    <span><i class="fas fa-mobile-alt"></i> Responsivo</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== BOTÃO VOLTAR AO TOPO ===== -->
+    <button class="back-to-top" id="backToTop" aria-label="Voltar ao topo">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- ===== MODAL DE LOGIN ===== -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeLoginModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="modal-header">
+                <h2><i class="fas fa-user-circle"></i> Entrar</h2>
+                <p>Faça login para acessar sua conta</p>
+            </div>
+            <form id="loginForm" class="auth-form">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" placeholder="seu@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Senha</label>
+                    <input type="password" id="loginPassword" placeholder="Digite sua senha" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Entrar</button>
+                <div class="auth-links">
+                    <a href="#" onclick="event.preventDefault(); showNotification('Recuperação', 'Funcionalidade em desenvolvimento')">
+                        Esqueceu a senha?
+                    </a>
+                    <a href="#" onclick="event.preventDefault(); showNotification('Cadastro', 'Funcionalidade em desenvolvimento')">
+                        Criar conta
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ===== SCRIPTS ===== -->
+    <script src="js/video-storage.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/auth.js"></script>
+    
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(registration => {
+                        console.log('ServiceWorker registrado com sucesso:', registration);
+                    })
+                    .catch(error => {
+                        console.warn('Erro ao registrar ServiceWorker:', error);
+                    });
+            });
+        }
+
+        // Instalação do PWA
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            showInstallPrompt();
+        });
+
+        function showInstallPrompt() {
+            const notification = document.getElementById('notification');
+            document.getElementById('notifTitle').textContent = '📱 Instale o App';
+            document.getElementById('notifMessage').innerHTML = 
+                'Instale o bygdëall animes no seu dispositivo para uma experiência melhor. <button onclick="installApp()" class="btn btn-primary btn-sm">Instalar</button>';
+            notification.classList.add('show');
+        }
+
+        function installApp() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        showNotification('Sucesso', 'App instalado com sucesso!');
+                    }
+                    deferredPrompt = null;
+                });
+            }
+        }
+    </script>
+</body>
+                  </html>
